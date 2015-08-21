@@ -1,0 +1,41 @@
+extends ../layout
+block content
+  .container
+    h1 View Dispute
+    +alerts()
+    form.form-horizontal(action='/dispute/save', method='post', role='form')
+      input(type='hidden', name='id', value=dispute.id)
+      .form-group
+        label.control-label.col-sm-2 Buyer Id
+        .col-sm-10
+          input.form-control(name='BuyerId', placeholder='Buyer ID', value=dispute.BuyerId)
+      .form-group
+        label.control-label.col-sm-2 Order Id
+        .col-sm-10
+          input.form-control(name='OrderId', placeholder='Order ID', value=dispute.OrderId)
+      .form-group
+        label.control-label.col-sm-2 Name
+        .col-sm-10
+          input.form-control(type='text', name='name', placeholder='Senders Name', value=dispute.name)
+      .form-group
+        label.control-label.col-sm-2 Status
+        .col-sm-10
+          select.form-control(type='text', name='status', placeholder='Complaint Status', value=dispute.status)
+            option(selected=('pending' === dispute.status)) pending
+            option(selected=('resolved' === dispute.status)) resolved
+            option(selected=('rejected' === dispute.status)) rejected
+      .form-group
+        label.control-label.col-sm-2 Action Requested
+        .col-sm-10
+          textarea.form-control(rows='10', name='actionRequested', placeholder='The Buyers Requested Action')= dispute.actionRequested
+      .form-group
+        label.control-label.col-sm-2 Action Description
+        .col-sm-10
+          textarea.form-control(rows='10', name='actionDescription', placeholder='Whether this dispute was resolved or rejected and why/how')= dispute.actionDescription
+      .form-group
+        label.control-label.col-sm-2 Message
+        .col-sm-10
+          textarea.form-control(rows='10', name='message')= dispute.message
+      .form-group
+        .col-sm-offset-2.col-sm-10
+          button.btn.btn-success(type='submit') Save Dispute

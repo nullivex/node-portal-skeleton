@@ -1,0 +1,33 @@
+extends ../layout
+block append js
+  script(src='/js/table.js')
+block content
+  .container
+    +tableHeader('Pending Orders')
+    +alerts()
+    form(method='post', role='form')
+      table.table.table-striped
+        tr
+          th
+            input#toggle(type='checkbox')
+          th ID
+          th Status
+          th Seller Id
+          th Buyer Id
+          th Item Id
+          th Created
+          th Modified
+        each row,i in list
+          tr
+            td
+              input(type='checkbox', name='remove[]', value=row.id)
+            td
+              a(href='/order/edit?id=#{row.id}')= row.id
+            td=row.status
+            td= row.SellerId
+            td= row.BuyerId
+            td= row.ItemId
+            td= new Date(row.createdAt).toDateString()
+            td= new Date(row.updatedAt).toDateString()
+      +tableFooter(page,count)
+

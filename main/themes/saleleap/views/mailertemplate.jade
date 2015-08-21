@@ -1,0 +1,12 @@
+h3 A New Video Report has been filed for #{video.Show.title} #{video.Episode.title} #{video.version}
+p <strong>E-Mail Address:</strong> #{data.email}
+p <strong>Problem:</strong> #{data.description}
+p <strong>User Message:</strong> #{data.otherDescription}
+p <strong> Browser Details:</strong> #{browserDetail}
+p <strong>IP address:</strong> #{req}
+p To view this on animegg,&nbsp;
+  a(href='http://animegg.tv/#{video.Episode.uri}##{video.version}')
+    | Click Here
+p To view the report in the admin panel,&nbsp;
+  a(href='http://admin.animegg.com/video/edit?id=#{video.id}')
+    | Click Here

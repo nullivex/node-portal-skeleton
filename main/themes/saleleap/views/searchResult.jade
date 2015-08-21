@@ -1,0 +1,34 @@
+extends layout
+append title
+  title SaleLeap Search Results for #{searchString} - Shop Amazon and Ebay Free
+append css
+  link(rel='stylesheet', href='/css/index2.css')
+append js
+append meta
+  meta(name='description', content='Purchase Items from Amazon and Ebay. Order Items From Amazon and Ebay for Free, Leave a Review, Get Refunded, Keep Your Item')
+  meta(name='keywords', content='amazon,ebay,free,refunds,amazon purchases,ebay purchases,get your money back,mobile')
+block content
+  .container
+    .row
+      .col-md-12
+        .infobox
+          h3 Search Results on SaleLeap for "#{searchString}"!
+    .row
+      .col-md-3
+        .lead
+          each category in categoryList
+            a.list-group-item(href='/category/#{category.name}')
+              | #{toTitleCase(category.name)}
+      .col-md-9
+        if list.length
+          each item, index in list
+            .col-sm-4.col-lg-4.col-md-4
+              .thumbnail
+                img(src=item.thumbnailUrl)
+                .caption
+                  h4.pull-right= '$' + item.price
+                  h4
+                    a(href='/item/detail/?id=#{item.id}') #{S(item.title).truncate(18)}
+                  p=item.description
+        else
+          p No Items Matched Your Search :(

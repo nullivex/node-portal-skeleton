@@ -1,0 +1,38 @@
+extends ../layout
+block content
+  .container
+    h1 View Order
+    +alerts()
+    form.form-horizontal(action='/order/save', method='post', role='form')
+      input(type='hidden', name='id', value=order.id)
+      .form-group
+        label.control-label.col-sm-2 Buyer Id
+        .col-sm-10
+          input.form-control(name='BuyerId', placeholder='Buyer ID', value=order.BuyerId)
+      .form-group
+        label.control-label.col-sm-2 Order Id
+        .col-sm-10
+          input.form-control(name='id', placeholder='Order ID', value=order.id)
+      .form-group
+        label.control-label.col-sm-2 Seller Id
+        .col-sm-10
+          input.form-control(name='SellerId', placeholder='Seller ID', value=order.SellerId)
+      .form-group
+        label.control-label.col-sm-2 Status
+        .col-sm-10
+          select.form-control(type='text', name='status', placeholder='Complaint Status', value=order.status)
+            option(selected=('ordered' === order.status)) ordered
+            option(selected=('shipped' === order.status)) shipped
+            option(selected=('awaiting feedback' === order.status)) awaiting feedback
+            option(selected=('complete' === order.status)) complete
+      .form-group
+        label.control-label.col-sm-2 Ordered At
+        .col-sm-10
+          input.form-control(type='text', name='createdAt', placeholder='Ordered Date', value=moment.utc(order.createdAt).format('MM-DD-YYYY'))
+      .form-group
+        label.control-label.col-sm-2 Order Updated At
+        .col-sm-10
+          input.form-control(type='text', name='updatedAt', placeholder='Updated Date', value=moment.utc(order.updatedAt).format('MM-DD-YYYY'))
+      .form-group
+        .col-sm-offset-2.col-sm-10
+          button.btn.btn-success(type='submit') Save Order

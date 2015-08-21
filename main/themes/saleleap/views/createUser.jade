@@ -1,0 +1,34 @@
+extends layout
+append title
+  title User Sign Up
+append css
+  link(rel='stylesheet', href='/css/entries.css')
+block content
+  .container
+    .row
+      .col-lg-12
+        .infobox.recent
+          | Create an Account
+      .col-md-10.logbox.col-centered
+        +alerts()
+        form.form-horizontal(name='save', method = 'post', action='/user/save')
+          .form-group
+            label.col-sm-2.control-label User Name
+            .col-sm-10
+              input.form-control(type='text', placeholder='User Name', name='username')
+          .form-group
+            label.col-sm-2.control-label Email
+            .col-sm-10
+              input.form-control(type='text', placeholder='User Email', name='email')
+          .form-group
+            label.col-sm-2.control-label Password
+            .col-sm-10
+              input.form-control(type='password', placeholder='Password', name='password')
+          .form-group
+            label.col-sm-2.control-label Confirm Password
+            .col-sm-10
+              input.form-control(type='password', placeholder='Password', name='passwordConfirm')
+          .form-group(style='margin-left:270px')
+            != recaptcha
+          .col-sm-offset-5
+            button.btn-success(type='submit') Create Account

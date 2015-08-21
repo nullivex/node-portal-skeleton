@@ -1,0 +1,26 @@
+extends layout
+append title
+  title User Login
+append css
+  link(rel='stylesheet', href='/css/entries.css')
+block content
+  .container
+    .row
+      .col-lg-12
+        .infobox.recent
+          | Login or Create an Account
+      .col-lg-8.logbox.col-centered
+        +alerts()
+        form.form-horizontal(name='login', method = 'post', action='/login')
+          .form-group
+            label.col-sm-2.control-label Email
+            .col-sm-10
+              input.form-control(type='text', placeholder='User Email', name='email')
+          .form-group
+            label.col-sm-2.control-label Password
+            .col-sm-10
+              input.form-control(type='password', placeholder='Password', name='password')
+          .col-sm-offset-2
+            button.btn-success.pull-right(type='submit') Login
+            button.btn-info
+              a(href='/createUser') Create An Account

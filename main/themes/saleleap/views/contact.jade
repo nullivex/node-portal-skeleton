@@ -1,0 +1,53 @@
+extends layout
+append title
+  title Contact Us
+append js
+  script.
+    if($(window).width() > 990){
+      $('#rightTop').html('<iframe src="/ads/madads160x600.html" height="600" width="160" </iframe>',scrolling = 'no');
+    }
+    else{
+      $('#rightTop').html('<iframe src="/ads/madads300x250.html" height="250" width="300" </iframe>');
+    }
+  script.
+    if($(window).width() > 990){
+      $('#rightBottom').html('<iframe src="/ads/ybrant160x600.html" height="600" width="160" </iframe>',scrolling = 'no');
+    }
+    else{
+      $('#rightBottom').html('<iframe src="/ads/ybrant300x250.html" height="250" width="300" </iframe>');
+    }
+block content
+  .container(style='margin-top: 15px')
+    .row
+      .col-md-10
+        .cblock
+          #recentTabs.home-tabs.recent-anime(role='tablist')
+            h2
+              a.active(href='#recentlyReleased', role='tab', data-toggle='tab') Contact Us
+          h1 Contact Animegg
+          h4 We would love to hear from you, Please fill out the form below and we will get back to you as soon as possible!
+          p Please include your name and email address.
+          form.form-horizontal(method='post', action='/contact/save')
+            .form-group
+              label.control-label.col-md-2 Email
+              .col-md-10
+                input(type='text', name='email', placeholder='Please include your email address here',style='width: 75%')
+            .form-group
+              label.control-label.col-md-2 Name
+              .col-md-10
+                input(type='text', name='name', placeholder='Please include your name here',style='width: 75%')
+            .form-group
+              label.control-label.col-md-2 Message
+              .col-md-10
+                textarea(rows='10', name='message', placeholder='Please include your message here',style='width: 75%')
+            .form-group
+              label.control-label.col-md-2 Please Fill out Captcha
+              .col-md-10
+                .captcha!= recaptcha
+            button.btn.btn-contact.btn-success(type='submit',style='margin-left: 150px') Send Email
+      .col-md-2
+        .ads
+          #rightTop
+          #rightBottom
+      .clearfix
+

@@ -1,0 +1,111 @@
+include alerts
+include mixins
+doctype html
+html
+  head
+    block title
+    block meta
+      meta(charset='utf-8')
+      meta(name='description', content='Purchase and Order Your Favorite Items From Ebay and Amazon For Free, Leave a Review on Ebay or Amazon and Get Your Money Back Refunded To You')
+      meta(name='author', content='SaleLeap')
+      meta(property='og:site_name', content='SaleLeap')
+      meta(property='fb:app_id', content='279321548895951')
+      meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    block css
+      link(rel='stylesheet', href='/css/index2.css')
+      link(rel='stylesheet', type='text/css', href='//bowercdn.net/c/html5-boilerplate-4.3.0/css/normalize.css')
+      link(rel='stylesheet', type='text/css', href='//bowercdn.net/c/html5-boilerplate-4.3.0/css/main.css')
+      link(rel='stylesheet', href='//bowercdn.net/c/bootstrap-3.2.0/dist/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/css/index2.css')
+    //link(rel='icon', href='/images/anime.png?v=2', sizes='16x16', type='image/png')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    //link(rel='shortcut icon', sizes='196x196', href='images/anime.png?v=2')
+  body
+    nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+      .container
+        // Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='/') SaleLeap
+        // Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              if !buyer
+                a.usertab(href='/login') Log In
+              if buyer
+                a.dropdown-toggle.usertab(data-toggle='dropdown') User
+                  ul.dropdown-menu
+                    li
+                      a(href='/logout') Log Out
+                    li
+                      a(href='/cart') Cart
+                    li
+                      a(href='/buyer/profile') Profile
+            li.search
+              form(method='get', action='/search')
+                input.ui-autocomplete-input(type='text', name='search', placeholder='Search Items...', id="jsid-search-input", tabindex="1")
+                span.ui-helper-hidden-accessible(role="status", aria-live="polite")
+            li
+              a.dropdown-toggle(data-toggle='dropdown') Browse
+                ul.dropdown-menu
+                  li
+                    a(href='/item/list') All
+                  li
+                    a(href='/item/popular') Popular
+                  li
+                    a(href='/item/new') New
+            li
+              a.blue(href='/random') Random
+      a(name='top')
+    //main content
+    block content
+    //footer
+    .container
+      hr
+      ul.footer-links.pull-right
+        li
+          a.btn.btn-default.btn-sm(href='/terms-of-service')  Terms of Service
+        li
+          a.btn.btn-default.btn-sm(href='/privacy-policy')  Privacy Policy
+        li
+          a.btn.btn-default.btn-sm(href='/contact')  Contact Us
+        li
+          a.btn.btn-sm.btn-default(href='/rss', target='_blank') RSS Feed
+        li
+          a.btn.btn-sm.btn-default(href='javascript:void(0)', style='display: none')
+            img(src='http://whos.amung.us/swidget/h4wdo1m0q3uy.png', width='80', height='15', border='0')
+            img(src='http://whos.amung.us/swidget/8c1wm07oftnb.png', style='display: none')
+            img(src='http://whos.amung.us/swidget/66d2fz5nko8k.png', style='display: none')
+      ul.footer-links
+        li
+          a.btn.btn-sm.btn-default.disabled &copy; SaleLeap #{new Date().getFullYear()}
+        li
+          a.btn.btn-sm.btn-default.disabled(href='http://www.saleleap.com') Shop Amazon and Ebay Free
+    //load scripts
+    block js
+      //statcounter
+      script.
+        var sc_project = 10294320;
+        var sc_invisible = 1;
+        var sc_security = "12ea04a2";
+        var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+        document.write("<sc" + "ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></" + "script>");
+      //end statcounter
+      //google analytics
+      script.
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-51999698-1', 'www.animegg.tv');
+        ga('send', 'pageview');
+      //end google analytics
+      //local scripts
+      script(src='//bowercdn.net/c/jquery-1.11.1/dist/jquery.min.js')
+      script(src='//bowercdn.net/c/bootstrap-3.2.0/dist/js/bootstrap.min.js')
+      script(src='//bowercdn.net/c/moment-2.7.0/min/moment.min.js')
+      //end local scripts

@@ -1,0 +1,93 @@
+mixin ongoingShowList(list)
+  // ongoing left
+  .content-right
+    .social-box
+      .pw-widget.pw-layout-horizontal.pw-size-small
+        .button-facebook
+          a.pw-button-facebook
+        .button-twitter
+          a.pw-button-twitter
+        .button-pintrest
+          a.pw-button-pinterest
+        .button-reddit
+          a.pw-button-reddit
+        .button-google
+          a.pw-button-googleplus
+        .button-tumblr
+          a.pw-button-tumblr
+      script(src='http://i.po.st/static/v3/post-widget.js#publisherKey=5o900ma7d91uomujkqao&retina=true', type='text/javascript')
+      .social-share
+        .tweet
+          a.twitter-follow-button(href='https://twitter.com/Animeggnews', data-show-count='false', data-show-screen-name='false',data-hashtags='Animegg')
+        .sharegoogle
+          .g-plusone(data-annotation='none')
+        .likefb
+          a.fb-like(href='https://facebook.com/animeggfan', data-action='like', data-show-faces='false', data-share='false', data-layout='button')
+    .ongoingheader
+    .ongoing
+      each show in list
+        div
+          a.egg.egg-empty(href='/series/#{show.uri}')  #{show.title}
+
+mixin episodeVersionColor(version,titlecase)
+  if version === 'subbed'
+    span.btn-xs.btn-subbed SUBBED
+  if version === 'dubbed'
+    span.btn-xs.btn-dubbed DUBBED
+  if version === 'raw'
+    span.btn-xs.btn-raw RAW
+
+mixin episodeHD(media)
+  if media && media.filter(function(a){return a.MediaImport && a.MediaImport.status === 'complete'}).length > 1
+    span.btn-xs.btn-hd HD
+
+mixin episodeVersionRow(episode)
+  tr
+    td.text-center
+      a(href='/#{episode.uri}')= episode.viewNumber()
+    td
+      a(href='/#{episode.uri}')= episode.title
+    each version in ['subbed','dubbed','raw']
+      - var video
+      - for(var i = 0; i < episode.Videos.length; i++){
+      -  if(episode.Videos[i].version === version){
+      -   video = episode.Videos[i]
+      -   break
+      -  }
+      -  video = false
+      - }
+      if video
+        td
+          a(href='/#{episode.uri}##{version}')
+            +episodeVersionColor(version,true)
+            +episodeHD(video.Media)
+      else
+        td
+
+mixin ads()
+  div#ad_container
+
+mixin episodeads()
+  .right-banner-160x600
+    //img(src='/images/animegg-banner-right-1.jpg')
+    div
+      script(src='http://ads-by.madadsmedia.com/tags/32697/11822/async/160x600.js', type='text/javascript')
+    div.bottom(style='background-image: url(\'/images/animegg-banner-right-2.jpg\');')
+      //img(src='/images/animegg-banner-right-1.jpg')
+      script.
+        var cpmstar_rnd=Math.round(Math.random()*999999);
+        var cpmstar_pid=30090;
+        document.writeln("<SCR"+"IPT language='Javascript' src='//server.cpmstar.com/view.aspx?poolid="+cpmstar_pid+"&script=1&rnd="+cpmstar_rnd+"'></SCR"+"IPT>");
+    .clearfix
+
+mixin tagList(tagList,currentTag)
+  ul.newmanga.category
+    li(class=!currentTag ? 'selected' : '')
+      div
+        a.anm_det_pop(href='/popular-series')
+          strong All
+    each tag in tagList || []
+      li(class=currentTag === tag.tag ? 'selected' : '')
+        div
+          a.anm_det_pop(href='/genre/#{tag.tag}')
+            strong #{toTitleCase(tag.tag)}

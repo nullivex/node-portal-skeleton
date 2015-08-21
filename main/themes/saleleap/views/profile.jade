@@ -1,0 +1,24 @@
+extends layout
+append title
+  title #{user.name} Profile
+append css
+  link(rel='stylesheet', href='/css/entries.css')
+  link(rel='stylesheet', href='/css/profile.css')
+block content
+  +alerts()
+  .content.content-container
+    form.form-horizontal(name='save', method = 'post', action='/profile/save')
+      h1=user.name || user.email
+      .form-group
+        label.col-sm-2.control-label User Name
+        .col-sm-8
+          input.form-control(type='text', placeholder='User Name', name='name', style='margin-bottom: 10px', value=user.name)
+      .form-group
+        label.col-sm-2.control-label Email
+        .col-sm-8
+          input.form-control(type='text', placeholder='User Email', name='email', style='margin-bottom: 10px', value=user.email)
+      .col-sm-offset-6
+        button.btn-default.btn-success(type='submit') Save
+    h3(style='margin-top: 390px') Original Artwork by Animegg, more can be seen by visiting the Blog!!
+    h4(style='margin-top: 55px') The User Profile is under construction at the moment but you can look forward to many new updates including user images, user in-house comments, we will be adding a point system for rewards as well as many other things! As always, enjoy Animegg!
+

@@ -1,0 +1,61 @@
+extends ../layout
+block append js
+  script(src='/js/table.js')
+block content
+  .container
+    +tableHeader('OOSE Import')
+    +alerts()
+    form(method='post', role='form')
+      table.table.table-striped
+        tr
+          th
+            input#toggle(type='checkbox')
+          th Video
+          th Episode
+          th Show
+          th Source
+          th Status
+          th Progress
+          th Handle
+          th Message
+          th Options
+        each row in list
+          - var percentComplete = 0
+          - if('processing' === row.status)
+          -   percentComplete = ((row.frameComplete / row.frameTotal) * 100).toFixed(2)
+          - if('complete' === row.status) percentComplete = 100
+          - var statusClass = ''
+          - if('processing' === row.status) statusClass ='bg-info'
+          - if(['error','aborted'].indexOf(row.status) >= 0) statusClass = 'bg-danger'
+          tr(class=statusClass)
+            td
+              input(type='checkbox', name='remove[]', value=row.id)
+            if row.Medium && row.Medium.Video && row.Medium.Video.Episode && row.Medium.Video.Show
+              td
+                a(href='/video/edit?id=#{row.Medium.Video.id}')= row.Medium.Video.version
+              td
+                a(href='/episode/edit?id=#{row.Medium.Video.Episode.id}')= row.Medium.Video.Episode.number
+              td
+                a(href='/show/edit?id=#{row.Medium.Video.Show.id}')= row.Medium.Video.Show.title
+              td= row.Medium.sourceName
+            else
+              td(colspan='3') No Video
+            td= row.status
+            td
+              if 'processing' === row.status && metrics && metrics.frameDescription
+                div
+                  small.text-muted= S('' + metrics.frameDescription).truncate(75)
+              .progress.progress-striped(style='margin-bottom: 0;')
+                .progress-bar.progress-bar-info(role='progressbar', aria-valuenow=percentComplete, aria-valuemin='0', aria-valuemax='100', style='width: #{percentComplete}%;')
+                  | #{percentComplete}%
+              if 'processing' === row.status
+                div
+                  small.text-muted #{prettyBytes(row.frameComplete)} / #{prettyBytes(row.frameTotal)}
+            td= row.handle
+            td= row.message
+            td
+              div
+                a.btn-sm.btn-warning(href='/media/retry?id=#{row.Medium.id}&video=#{row.Medium.Video.id}')
+                  span.glyphicon.glyphicon-refresh
+                  span  Retry
+      +tableFooter(page,count)

@@ -1,0 +1,44 @@
+extends layout
+append title
+  title SaleLeap Category Lists - Shop Amazon and Ebay Free
+append css
+  link(rel='stylesheet', href='/css/index2.css')
+append js
+append meta
+  meta(name='description', content='Purchase Items from Amazon and Ebay. Order Items From Amazon and Ebay for Free, Leave a Review, Get Refunded, Keep Your Item')
+  meta(name='keywords', content='amazon,ebay,free,refunds,amazon purchases,ebay purchases,get your money back,mobile')
+block content
+  .container
+    .row
+      .col-md-12
+        .infobox
+          h3 Browse Categories on SaleLeap!
+    .row
+      .col-md-3
+        .lead
+          each category in categoryList
+            a.list-group-item(href='/category/#{category.name}')
+              | #{toTitleCase(category.name)}
+      .col-md-9
+        each item in itemList
+          .col-sm-4.col-lg-4.col-md-4
+            .thumbnail
+              img(src=item.thumbnailUrl)
+              .caption
+                h4.pull-right= '$' + item.price
+                h4
+                  a(href='/item/detail/?id=#{item.id}') #{S(item.title).truncate(18)}
+                p=item.description
+      .row
+        .text-center
+          ul.pagination
+            li
+              a(href='?start=#{page.first}') <<
+            li
+              a(href='?start=#{page.previous}') Previous
+            li
+              span #{page.start + 1} - #{page.end} of #{page.count} Items
+            li
+              a(href='?start=#{page.next}') Next
+            li
+              a(href='?start=#{page.last}') >>

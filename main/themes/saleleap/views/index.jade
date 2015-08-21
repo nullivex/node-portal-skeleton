@@ -1,0 +1,76 @@
+extends layout
+append title
+  title SaleLeap - Shop Amazon and Ebay Free
+append css
+  link(rel='stylesheet', href='/css/index2.css')
+append js
+append meta
+  meta(name='description', content='Purchase Items from Amazon and Ebay. Order Items From Amazon and Ebay for Free, Leave a Review, Get Refunded, Keep Your Item')
+  meta(name='keywords', content='amazon,ebay,free,refunds,amazon purchases,ebay purchases,get your money back,mobile')
+block content
+  .container
+    .row
+      .col-md-12
+        .infobox
+          h5 Purchase and Order From Amazon and Ebay for free!
+          .info
+            |  View Thousands of
+            a(href='http://www.saleleap.com')  Items Online
+            |  to purchase for free only at SaleLeap.com. We have a variety of Items you can choose from, you can find the perfect
+            |  item just for you, and get it for free! All you have to do is leave positive feedback for the seller after you have received your item and a full refund will be issued!
+    .row
+      .col-md-3
+        .lead Categories
+          each category in categoryList
+            a.list-group-item(href='/category/#{category.name}')
+              | #{toTitleCase(category.name)}
+      .col-md-9
+        .row
+          .infobox.recent
+            | Featured Items
+        .row.carousel-holder
+          .col-md-12
+            #carousel-items.carousel.slide(data-ride='carousel')
+              ol.carousel-indicators
+                li.active(data-target='#carousel-items', data-slide-to='0')
+                li(data-target='#carousel-items', data-slide-to='1')
+                li(data-target='#carousel-items', data-slide-to='2')
+                li(data-target='#carousel-items', data-slide-to='3')
+                li(data-target='#carousel-items', data-slide-to='4')
+                li(data-target='#carousel-items', data-slide-to='5')
+                li(data-target='#carousel-items', data-slide-to='6')
+                li(data-target='#carousel-items', data-slide-to='7')
+                li(data-target='#carousel-items', data-slide-to='8')
+                li(data-target='#carousel-items', data-slide-to='9')
+                li(data-target='#carousel-items', data-slide-to='10')
+              .carousel-inner
+                .item.active
+                  img.slide-image(src='http://placehold.it/800x300', alt='')
+                  .carousel-caption
+                    h2 Welcome to Saleleap!
+                    p Enjoy our large inventory of items you can shop for for free!
+                each item in featuredItems
+                  .item
+                    img.slide-image(src=item.thumbnailUrl)
+                    .carousel-caption
+                      h2
+                        a(href='/item/detail/?id=#{item.id}') #{S(item.title).truncate(30)}
+                      p
+                        a(href='/item/detail/?id=#{item.id}') #{S(item.description).truncate(250)}
+              a.left.carousel-control(href='#carousel-items', data-slide='prev')
+                span.glyphicon.glyphicon-chevron-left
+              a.right.carousel-control(href='#carousel-items', data-slide='next')
+                span.glyphicon.glyphicon-chevron-right
+        .row
+          .infobox.recent
+            | Recently Listed Items
+        .row
+          each item in recentItems
+            .col-sm-4.col-lg-4.col-md-4
+              .thumbnail
+                img(src=item.thumbnailUrl)
+                .caption
+                  h4.pull-right= '$' + item.price
+                  h4
+                    a(href='/item/detail/?id=#{item.id}') #{S(item.title).truncate(20)}
+                  p=item.description

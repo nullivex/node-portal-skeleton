@@ -1,0 +1,35 @@
+extends ../layout
+append title
+  title User Edit
+append css
+  link(rel='stylesheet', href='/css/index2.css')
+block content
+  .container
+    .row
+      .col-lg-12
+        .infobox.recent
+          | Update Your Account
+      .col-md-11.logbox.col-centered
+        +alerts()
+        form.form-horizontal(name='save', method = 'post', action='/user/save')
+          .form-group
+            label.col-sm-2.control-label User Name
+            .col-sm-10
+              input.form-control(type='text', placeholder='User Name', name='username', value=buyer.username)
+          .form-group
+            label.col-sm-2.control-label Email
+            .col-sm-10
+              input.form-control(type='text', placeholder='User Email', name='email', value=buyer.email)
+          .form-group
+            label.col-sm-2.control-label Password
+            .col-sm-10
+              input.form-control(type='password', placeholder='Password', name='password')
+          .form-group
+            label.col-sm-2.control-label Confirm Password
+            .col-sm-10
+              input.form-control(type='password', placeholder='Password', name='passwordConfirm')
+          .form-group(style='margin-left:270px')
+            != recaptcha
+          .col-sm-offset-4
+            button.btn.btn-success(type='submit') Update Account
+            a.button.btn.btn-primary(href='/user/history') View My History

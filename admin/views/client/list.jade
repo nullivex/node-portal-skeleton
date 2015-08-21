@@ -1,0 +1,34 @@
+extends ../layout
+block append js
+  script(src='/js/table.js')
+block content
+  .container
+    +tableHeader('Seller','/seller/create','Create Seller')
+    +alerts()
+    form(method='post', role='form')
+      table.table.table-striped
+        tr
+          th
+            input#toggle(type='checkbox')
+          th Full Name
+          th Email
+          th View Details
+          th Last Login
+          th Active
+        each row,i in list
+          tr
+            td
+              input(type='checkbox', name='remove[]', value=row.id)
+            td
+              a(href='/seller/edit?id=#{row.id}')= row.name
+            td= row.email
+            td
+              a(href='/seller/detail?id=#{row.id}') Seller Details
+            td
+              if row.dateSeen
+                div.text-success= new Date(row.dateSeen * 1000).toDateString()
+              if row.dateFail
+                div.text-danger= new Date(row.dateFail * 1000).toDateString()
+            td
+              +active(row.active)
+      +tableFooter(page,count)

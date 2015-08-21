@@ -1,0 +1,16 @@
+$(document).ready(function(){
+  var videoTabs = $('#videos a[data-toggle="tab"]')
+  var videoTabFirst = $('#videos a:first')
+  var videoReportMirror = $('#videoReportMirror')
+  var videoReportVersion = $('#videoReportVersion')
+  var videoReportId = $('#videoReportId')
+  videoTabs.on('shown.bs.tab',function(e){
+    var mirror = $(e.target).attr('data-mirror')
+    var version = $(e.target).attr('data-version')
+    var id = $(e.target).attr('data-id')
+    videoReportMirror.val(mirror)
+    videoReportVersion.val(version)
+    videoReportId.val(id)
+  })
+  videoTabFirst.tab('show')
+})

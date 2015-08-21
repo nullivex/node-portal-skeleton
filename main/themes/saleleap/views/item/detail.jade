@@ -1,0 +1,38 @@
+extends ../layout
+append title
+  title SaleLeap Item Details - Shop Amazon and Ebay Free
+append css
+  link(rel='stylesheet', href='/css/index2.css')
+append js
+append meta
+  meta(name='description', content='Purchase Items from Amazon and Ebay. Order Items From Amazon and Ebay for Free, Leave a Review, Get Refunded, Keep Your Item')
+  meta(name='keywords', content='amazon,ebay,free,refunds,amazon purchases,ebay purchases,get your money back,mobile')
+block content
+  .container
+    .row
+      .col-lg-12
+        h1.page-header
+          | #{item.title}
+    .row
+      .col-md-8
+        img.img-responsive(src=item.thumbnailUrl, alt='http://placehold.it/750x500')
+      .col-md-4
+        h3 Price
+        p= '$' + item.price
+        h3 Item Description
+        p= item.description
+        h3 Item Made Available By
+        h4= item.Seller.name + ' ! '
+        p
+          a.btn.btn-primary(href='#') Add To Cart!
+          a.btn.btn-success(href='#') Buy Now!
+    .row
+      .col-lg-12
+          .infobox.recent
+            | Other Featured Items
+      each item in featuredItems
+        .col-sm-3.col-xs-6
+          a(href='/item/detail/?id=#{item.id}')
+            img.img-responsive.portfolio-item(src=item.thumbnailUrl, alt='http://placehold.it/500x300')
+            .caption
+              h4=item.title

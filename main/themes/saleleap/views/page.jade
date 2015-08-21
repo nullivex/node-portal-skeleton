@@ -1,0 +1,33 @@
+extends layout
+append title
+  title= page.title
+append js
+  script.
+    if($(window).width() > 990){
+      $('#rightTop').html('<iframe src="/ads/madads160x600.html" height="600" width="160" </iframe>',scrolling = 'no');
+    }
+    else{
+      $('#rightTop').html('<iframe src="/ads/madads300x250.html" height="250" width="300" </iframe>');
+    }
+  script.
+    if($(window).width() > 990){
+      $('#rightBottom').html('<iframe src="/ads/ybrant160x600.html" height="600" width="160" </iframe>',scrolling = 'no');
+    }
+    else{
+      $('#rightBottom').html('<iframe src="/ads/ybrant300x250.html" height="250" width="300" </iframe>');
+    }
+block content
+  .container(style='margin-top: 15px')
+    .row
+      .col-md-10
+        .cblock
+          #recentTabs.home-tabs.recent-anime(role='tablist')
+            h2
+              a.active(href='#recentlyReleased', role='tab', data-toggle='tab')=page.title
+          .curl
+            p!= page.html
+      .col-md-2
+        .ads
+          #rightTop
+          #rightBottom
+      .clearfix

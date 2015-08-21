@@ -1,0 +1,2 @@
+ALTER TABLE `Saleleap`.`Sellers`
+ADD COLUMN `balance` INT(11) UNSIGNED NULL DEFAULT NULL AFTER `name`;

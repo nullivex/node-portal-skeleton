@@ -1,0 +1,28 @@
+extends ../layout
+block append js
+  script(src='/js/table.js')
+block content
+  .container
+    +tableHeader('Rejected Disputes')
+    +alerts()
+    form(method='post', role='form')
+      table.table.table-striped
+        tr
+          th
+            input#toggle(type='checkbox')
+          th Name
+          th Status
+          th Action Requested
+          th Message
+          th Date Received
+        each row,i in list
+          tr
+            td
+              input(type='checkbox', name='remove[]', value=row.id)
+            td
+              a(href='/dispute/detail?id=#{row.id}')= row.name
+            td= row.status
+            td= row.actionRequested
+            td= row.message
+            td= new Date(row.createdAt).toDateString()
+      +tableFooter(page,count)

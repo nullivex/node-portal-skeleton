@@ -1,0 +1,46 @@
+extends ../layout
+block content
+  .container
+    h1 Update Item
+    +alerts()
+    form.form-horizontal(action='/items/save', method='post', role='form')
+      input(type='hidden', name='id', value=item.id)
+      .form-group
+        label.control-label.col-sm-2 Title
+        .col-sm-10
+          input.form-control(type='text', name='title', placeholder='Item Title', value=item.title)
+      .form-group
+        label.control-label.col-sm-2 Price
+        .col-sm-10
+          input.form-control(name='price', placeholder='Item Price, No Dollar Sign ($) needed', value=item.price)
+      .form-group
+        label.control-label.col-sm-2 URI
+        .col-sm-10
+          input.form-control(name='uri', placeholder='Item URI', value=item.uri)
+      .form-group
+        label.control-label.col-sm-2 Description
+        .col-sm-10
+          textarea.form-control(rows='10', name='description')= item.description
+      .form-group
+        label.control-label.col-sm-2 Categories
+        .col-sm-10
+          input.form-control(type='text', name='categories', placeholder='Categories, comma ( , ) separated', value=S(item.categories.join(', ')).trim().s)
+      .form-group
+        label.control-label.col-sm-2 Thumbnail
+        .col-sm-10
+          img.form-control-static(src=item.thumbnailUrl)
+        .col-sm-offset-2.col-sm-10
+          a.btn.btn-sm.btn-primary(href='/items/importThumbnail?id=#{item.id}')
+            span.glyphicon.glyphicon-download
+            span  Import Thumbnail
+      .form-group
+        label.control-label.col-sm-2 New
+        .col-sm-10
+          input(type='checkbox', name='new', checked=item.new)
+      .form-group
+        label.control-label.col-sm-2 Active
+        .col-sm-10
+          input(type='checkbox', name='active', checked=item.active)
+      .form-group
+        .col-sm-offset-2.col-sm-10
+          button.btn.btn-success(type='submit') Save
